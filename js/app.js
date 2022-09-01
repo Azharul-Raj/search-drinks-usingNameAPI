@@ -76,7 +76,9 @@ const drinkDetails = async(id) => {
 // display details 
 const displayDetails = (singleDrink) => {
   const details = document.getElementById('modal')
-  
+  singleDrink.forEach(drink => {
+    const {strDrink,}=drink
+  })
 }
 
 
