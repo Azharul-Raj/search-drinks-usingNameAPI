@@ -1,15 +1,27 @@
 const loadDrink = async(drinkName) => {
     const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkName}`)
     const data = await res.json()
-    return(data.drinks)
+    displayDrinks(data.drinks)
 }
 // console.log(drinksElement)
 // drinks function 
-const displayDrinks = async (drinkName) => {
-  const drinks = await loadDrink(drinkName)
+const displayDrinks = (drinks) => {
+  const drinkContainer = document.getElementById('drink-list')
+  drinkContainer.textContent =``
   console.log(drinks)
-    const drinkContainer = document.getElementById('drink-list')
-    drinks.forEach(drink => {
+  // console.log(drinks.length)
+  // not found container
+  const notFound = document.getElementById('not-found')
+  console.log(notFound)
+  if (!drinks) {
+    console.log('notFound')
+    notFound.classList.remove('hidden')
+  }
+  else {
+    console.log('found')
+    notFound.classList.add('hidden')
+  }
+    drinks && drinks.forEach(drink => {
       console.log(drink)
       const {strDrinkThumb,strDrink,strInstructions} = drink
         const div = document.createElement('div')
@@ -34,9 +46,8 @@ document.getElementById('search-field').addEventListener('keypress', (event) => 
   const searchField = document.getElementById('search-field')
   const searchText = searchField.value
   if (enterPress === 'Enter') {
-    
-    displayDrinks(searchText)
+    loadDrink(searchText)
   }
 })
-displayDrinks()
+// displayDrinks()
 // loadDrink()
