@@ -39,14 +39,32 @@ const displayDrinks = (drinks) => {
         `
         drinkContainer.appendChild(div)
     })
+  loading(false)
+}
+// loading function 
+const loading = (isLoading) =>{
+  const loadingContainer = document.getElementById('loading')
+  if (isLoading === true) {
+    loadingContainer.classList.remove('hidden')
+  }
+  else {
+    loadingContainer.classList.add('hidden')
+  }
+}
+// search processing
+const processSearch = () => {
+  loading(true)
+  const searchField = document.getElementById('search-field')
+  const searchText = searchField.value
+  loadDrink(searchText)
+  searchField.value = ''
 }
 // event listener in search field
 document.getElementById('search-field').addEventListener('keypress', (event) => {
   const enterPress = event.key
-  const searchField = document.getElementById('search-field')
-  const searchText = searchField.value
+
   if (enterPress === 'Enter') {
-    loadDrink(searchText)
+    processSearch()
   }
 })
 // displayDrinks()
