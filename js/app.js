@@ -23,7 +23,7 @@ const displayDrinks = (drinks) => {
   }
     drinks && drinks.forEach(drink => {
       console.log(drink)
-      const {strDrinkThumb,strDrink,strInstructions} = drink
+      const {strDrinkThumb,strDrink,idDrink} = drink
         const div = document.createElement('div')
         div.innerHTML = `
          <div class="card w-96 bg-base-100 shadow-xl">
@@ -32,7 +32,7 @@ const displayDrinks = (drinks) => {
              <h2 class="card-title">${strDrink}</h2>
              <p>If a dog chews shoes whose shoes does he choose?</p>
              <div class="card-actions justify-end">
-               <button class="btn btn-primary w-full">View Details</button>
+             <label onclick="drinkDetails('${idDrink}')" for="my-modal-3" class="btn modal-button w-full bg-green-900">View Details</label>
              </div>
            </div>
          </div>
@@ -67,5 +67,18 @@ document.getElementById('search-field').addEventListener('keypress', (event) => 
     processSearch()
   }
 })
+// function for product details modal
+const drinkDetails = async(id) => {
+  const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+  const data = await res.json()
+  displayDetails(data.drinks)
+}
+// display details 
+const displayDetails = (singleDrink) => {
+  const details = document.getElementById('modal')
+  
+}
+
+
 // displayDrinks()
 // loadDrink()
