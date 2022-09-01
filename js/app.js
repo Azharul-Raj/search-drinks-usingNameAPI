@@ -1,12 +1,12 @@
-const loadDrink = async() => {
-    const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`)
+const loadDrink = async(drinkName) => {
+    const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkName}`)
     const data = await res.json()
     return(data.drinks)
 }
 // console.log(drinksElement)
 // drinks function 
-const displayDrinks = async () => {
-  const drinks = await loadDrink()
+const displayDrinks = async (drinkName) => {
+  const drinks = await loadDrink(drinkName)
   console.log(drinks)
     const drinkContainer = document.getElementById('drink-list')
     drinks.forEach(drink => {
@@ -28,5 +28,15 @@ const displayDrinks = async () => {
         drinkContainer.appendChild(div)
     })
 }
+// event listener in search field
+document.getElementById('search-field').addEventListener('keypress', (event) => {
+  const enterPress = event.key
+  const searchField = document.getElementById('search-field')
+  const searchText = searchField.value
+  if (enterPress === 'Enter') {
+    
+    displayDrinks(searchText)
+  }
+})
 displayDrinks()
 // loadDrink()
