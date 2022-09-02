@@ -8,12 +8,12 @@ const loadDrink = async(drinkName) => {
 const displayDrinks = (drinks) => {
   const drinkContainer = document.getElementById('drink-list')
   drinkContainer.textContent =``
-  console.log(drinks)
+  // console.log(drinks.length)
   // console.log(drinks.length)
   // not found container
   const notFound = document.getElementById('not-found')
   console.log(notFound)
-  if (!drinks) {
+  if (drinks === null) {
     console.log('notFound')
     notFound.classList.remove('hidden')
   }
@@ -32,7 +32,7 @@ const displayDrinks = (drinks) => {
              <h2 class="card-title">${strDrink}</h2>
              <p>If a dog chews shoes whose shoes does he choose?</p>
              <div class="card-actions justify-end">
-             <label onclick="drinkDetails('${idDrink}')" for="my-modal-3" class="btn modal-button w-full bg-green-900">View Details</label>
+             <a href="#my-modal-2" class="btn" onclick="drinkDetails('${idDrink}')">open modal</a>
              </div>
            </div>
          </div>
@@ -75,12 +75,17 @@ const drinkDetails = async(id) => {
 }
 // display details 
 const displayDetails = (singleDrink) => {
-  const details = document.getElementById('modal')
-  singleDrink.forEach(drink => {
-    const {strDrink,}=drink
+  const details = document.getElementById('details')
+  singleDrink && singleDrink.forEach(drink => {
+    const { strDrink, strAlcoholic, strCategory, strInstructions } = drink
+    console.log(strDrink, strAlcoholic)
+    // details.innerHTML = `
+    
+    // `
+
   })
 }
 
 
 // displayDrinks()
-// loadDrink()
+loadDrink('vodka')
