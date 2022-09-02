@@ -77,12 +77,19 @@ const drinkDetails = async(id) => {
 const displayDetails = (singleDrink) => {
   const details = document.getElementById('details')
   singleDrink && singleDrink.forEach(drink => {
-    const { strDrink, strAlcoholic, strCategory, strInstructions } = drink
+    details.innerHTML = ''
+    const { strDrinkThumb,strDrink, strAlcoholic, strCategory, strInstructions } = drink
     console.log(strDrink, strAlcoholic)
-    // details.innerHTML = `
+    details.innerHTML = `
+    <div class="modal-box">
+      <img class="h-52 w-full" src="${strDrinkThumb}" alt="">
+       <p>${strInstructions}</p>
+       <div class="modal-action">
+       <a href="#" class="btn btn-sm btn-circle absolute right-2 top-2">✕</a>
+       </div>
+    </div>
+    `
     
-    // `
-
   })
 }
 
